@@ -1,0 +1,20 @@
+Fetched: Swag Labs
+https://www.saucedemo.com
+Fetched: Swag Labs
+Good pick — login is genuinely the richest testing surface there since the whole site is built around deliberately different user behaviors, not just a form.
+Here's what you're working with: six seeded usernames (standard_user, locked_out_user, problem_user, performance_glitch_user, error_user, visual_user), all sharing the password secret_sauce. Each one is designed to break a different class of automation assumption.
+Login-focused test cases:
+	1	Valid login — standard_user + secret_sauce → lands on inventory page. Your baseline "happy path."
+	2	Locked-out user — locked_out_user logs in with correct credentials but should be blocked with an error message. Good test of "credentials are right but access is still denied" — different from wrong password.
+	3	Wrong password / wrong username / empty fields — three separate negative cases. Does the error message differ per case, or is it generic? Worth checking if the app leaks info (e.g., "username not found" vs "wrong password" — a security-testing angle, not just functional).
+	4	Case sensitivity — does Standard_User or STANDARD_USER log in, or strictly fail? Not always specified — worth discovering rather than assuming.
+	5	Trailing/leading whitespace in username or password — does the app trim it, or fail login? Cheap boundary case.
+	6	Logout then back-button — after logout, does hitting browser back expose the inventory page from cache, or does it correctly redirect to login? A classic session-security gap many apps get wrong.
+	7	Direct URL access while unauthenticated — can you navigate straight to /inventory.html without logging in at all?
+Beyond login, once you're in:
+8. problem_user — known for broken images/UI on the inventory page (all product images are the same broken image). Good test: assert all product images actually have distinct, valid src attributes — this user should fail that assertion while standard_user passes.
+9. performance_glitch_user — intentionally slow page loads. Good test for asserting reasonable load-time behavior or timeout handling, contrasted against standard_user's speed.
+10. Sort dropdown (Name A–Z, Z–A, Price low–high, high–low) — assert the actual rendered order matches the selected sort, for all four options.
+11. Cart badge count — add items, assert badge count increments; remove items, assert it decrements or disappears at 0. Very similar shape to your ticket-count increment/decrement work.
+12. Checkout form validation — empty first name/last name/postal code fields, does it block submission with the right error per missing field?
+Want to start with the login suite (1–7) first, structuring it the same way you've been doing — page object + reusable step helpers — or jump straight to something else on this list?
