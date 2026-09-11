@@ -14,6 +14,8 @@ class LoginPage {
         this.username = page.locator("#user-name");
         this.password = page.locator("#password");
         this.loginButton = page.locator("#login-button")
+        this.lockedOutUserError = page.locator("h3[data-test='error']");
+        this.lockedOutUserErrorMessage = "Epic sadface: Sorry, this user has been locked out.";
         
     }
 
