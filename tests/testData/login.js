@@ -1,6 +1,5 @@
 // testData/login.js
 
-
 /*
 ====================================================================================================
 SauceDemo Test User Reference — expected behavior per account
@@ -42,7 +41,7 @@ visual_user                   | Succeeds       | Purely cosmetic — several ico
 // keyed by username so the fixture can do loginData[userType] to look one up.
 export const loginData = {
     // base URL the login page navigates to
-    BASE_URL: "https://www.saucedemo.com",
+    BASE_URL: "https://www.saucedemo.com/",
 
     // the "normal" account — nothing intentionally broken, used as the default user
     standard_user: {
@@ -84,6 +83,18 @@ export const loginData = {
         username: 'visual_user',
         password: 'secret_sauce',
         expectToSucceed: true
+    },
+
+    invalid_user: {
+        username: 'test',
+        password: 'test',
+    },
+
+    invalid_login_message: {
+        missingPassword: "Epic sadface: Password is required",
+        missingUsername: "Epic sadface: Username is required",
+        missingUsernamePassword: "Epic sadface: Username is required",
+        invalidUsernamePassword: "Epic sadface: Username and password do not match any user in this service",
     }
 };
 

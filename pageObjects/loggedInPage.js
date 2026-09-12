@@ -13,6 +13,7 @@ class LoggedInPage {
         //define items that need to be used to. log in
         this.applogo = page.locator(".app_logo");
         this.cartIconLink = page.locator(".shopping_cart_link");
+        this.loggedInPageURL = "/inventory.html"
     }
 
 }

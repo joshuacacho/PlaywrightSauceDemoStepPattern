@@ -1,8 +1,16 @@
 import { expect } from '@playwright/test';
 
-async function loginTest(userLoginPage) {
+async function returnLoginErrorMessage(userLoginPage, fieldName) {
+  
   await userLoginPage.goToLoginPage();
+  let myError = await userLoginPage.invalidLoginByField(fieldName);
+
+  return myError;
 }
 
 
-export { loginTest };
+
+//export class to be used globally
+export { 
+  returnLoginErrorMessage
+};
