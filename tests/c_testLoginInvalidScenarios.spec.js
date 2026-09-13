@@ -1,4 +1,4 @@
-import { test, expect } from '../pageObjects/pageObjectFixtures.js';
+import { test, expect } from '../pageObjects/pageObjectFixtures';
 import { loginData } from '../tests/testData/login';
 import { returnLoginErrorMessage } from '.././pageObjects/helpers/loginUsers';
 

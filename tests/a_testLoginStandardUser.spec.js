@@ -1,6 +1,6 @@
-import { test, expect } from '../pageObjects/pageObjectFixtures.js';
+import { test, expect } from '../pageObjects/pageObjectFixtures';
 import { loginData } from '../tests/testData/login';
-import { pageURL } from '../tests/testData/pageURLs';
+import { } from "../tests/testData/pageURLs"
 
 
 
