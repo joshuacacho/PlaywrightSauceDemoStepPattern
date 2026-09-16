@@ -47,7 +47,7 @@ export const loginData = {
     standard_user: {
         username: 'standard_user',       // literal login field value
         password: 'secret_sauce',        // shared password across all SauceDemo demo accounts
-        expectToSucceed: true            // login should succeed and reach /inventory.html
+        expectToSucceed: true,            // login should succeed and reach /inventory.html
     },
 
     // deliberately blocked account — SauceDemo rejects this login with an error message
@@ -95,6 +95,10 @@ export const loginData = {
         missingUsername: "Epic sadface: Username is required",
         missingUsernamePassword: "Epic sadface: Username is required",
         invalidUsernamePassword: "Epic sadface: Username and password do not match any user in this service",
+    },
+
+    mixed_case_sensitive: {
+        usernameMixedCase: 'sTaNdaRd_uSeR' //for mixed case sensitivity
     }
 };
 

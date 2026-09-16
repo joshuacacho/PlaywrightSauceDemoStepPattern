@@ -49,5 +49,70 @@ test('Verify Error Message for Invalid Login Scenarios', async ({ loggedInPage }
     expect(myError).toBe(loginData.invalid_login_message.invalidUsernamePassword);
     
   });
+
+  await test.step('Valid Username & Password Attempt to Log In UPPER Case Sensitivity', async () => {
+
+    myError = await returnLoginErrorMessage(userLoginPage, "validUpperCaseSensitive"); 
+    //console.log(myError)
+    expect(myError).toBe(loginData.invalid_login_message.invalidUsernamePassword);
+    
+  });
+
+  await test.step('Valid Username & Password Attempt to Log In Mixed Case Sensitivity', async () => {
+
+    myError = await returnLoginErrorMessage(userLoginPage, "validMixedCaseSensitive"); 
+    //console.log(myError)
+    expect(myError).toBe(loginData.invalid_login_message.invalidUsernamePassword);
+    
+  });
+
+  await test.step('Valid Username & Password Attempt to Log In Leading Spaces', async () => {
+
+    myError = await returnLoginErrorMessage(userLoginPage, "validLeadingSpace"); 
+    //console.log(myError)
+    expect(myError).toBe(loginData.invalid_login_message.invalidUsernamePassword);
+    
+  });
+
+  await test.step('Valid Username & Password Attempt to Log In Trailing Spaces', async () => {
+
+    myError = await returnLoginErrorMessage(userLoginPage, "validTrailingSpace"); 
+    //console.log(myError)
+    expect(myError).toBe(loginData.invalid_login_message.invalidUsernamePassword);
+    
+  });
+
+  await test.step('Valid Username & Password Attempt to Log In Leading and Trailing Spaces', async () => {
+
+    myError = await returnLoginErrorMessage(userLoginPage, "validLeadingTrailingSpaces"); 
+    //console.log(myError)
+    expect(myError).toBe(loginData.invalid_login_message.invalidUsernamePassword);
+    
+  });
+
+  await test.step('Valid Username & Leading Space Password Attempt to Log ', async () => {
+
+    myError = await returnLoginErrorMessage(userLoginPage, "validLeadingSpacesPassword"); 
+    //console.log(myError)
+    expect(myError).toBe(loginData.invalid_login_message.invalidUsernamePassword);
+    
+  });
+
+  await test.step('Valid Username & Trailing Space Password Attempt to Log In', async () => {
+
+    myError = await returnLoginErrorMessage(userLoginPage, "validTrailingSpacesPassword"); 
+    //console.log(myError)
+    expect(myError).toBe(loginData.invalid_login_message.invalidUsernamePassword);
+    
+  });
+
+  await test.step('Valid Username & Trailing and Leading Password Attempt to Log In', async () => {
+
+    myError = await returnLoginErrorMessage(userLoginPage, "validLeadTrailingSpacesPassword"); 
+    //console.log(myError)
+    expect(myError).toBe(loginData.invalid_login_message.invalidUsernamePassword);
+    
+  });
   
 });
+

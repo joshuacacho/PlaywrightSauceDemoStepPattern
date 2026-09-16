@@ -53,6 +53,7 @@ class LoginPage {
 
             let error = ""; //placeholder for error
 
+            //combination using valid and invalid user data
             if(fieldName == "name") {
                 await this.username.fill(loginData.invalid_user.username);
             }
@@ -69,6 +70,55 @@ class LoginPage {
             if (fieldName == null) {
                 // intentionally left blank: leave both fields empty to test the "no username/password" case.
             }
+
+             // Case Sensitivity Tests
+            if ( fieldName == "validUpperCaseSensitive") {
+                await this.username.fill(loginData.standard_user.username.toUpperCase());
+                await this.password.fill(loginData.standard_user.password);
+            }
+
+            if ( fieldName == "validMixedCaseSensitive") {
+                await this.username.fill(loginData.mixed_case_sensitive.usernameMixedCase); 
+                await this.password.fill(loginData.standard_user.password);
+            }
+            
+            // Boundary Tests
+            if ( fieldName == "validLeadingSpace") {
+                await this.username.fill(" " + loginData.standard_user.username); 
+                await this.password.fill(loginData.standard_user.password);
+            }
+
+            if ( fieldName == "validTrailingSpace") {
+                await this.username.fill(loginData.standard_user.username + " "); 
+                await this.password.fill(loginData.standard_user.password);
+            }
+
+            if ( fieldName == "validLeadingTrailingSpaces") {
+                await this.username.fill(" " + loginData.standard_user.username + " "); 
+                await this.password.fill(loginData.standard_user.password);
+            }
+
+            if ( fieldName == "validLeadingSpaces") {
+                await this.username.fill(" " + loginData.standard_user.username + " "); 
+                await this.password.fill(loginData.standard_user.password);
+            }
+
+            if ( fieldName == "validLeadingSpacesPassword") {
+                await this.username.fill(loginData.standard_user.username); 
+                await this.password.fill(" " + loginData.standard_user.password);
+            }
+
+            if ( fieldName == "validTrailingSpacesPassword") {
+                await this.username.fill(loginData.standard_user.username ); 
+                await this.password.fill(loginData.standard_user.password + " ");
+            }
+
+            if ( fieldName == "validLeadTrailingSpacesPassword") {
+                await this.username.fill(loginData.standard_user.username ); 
+                await this.password.fill(" " + loginData.standard_user.password + " ");
+            }
+
+
 
             await this.loginButton.click();
 
