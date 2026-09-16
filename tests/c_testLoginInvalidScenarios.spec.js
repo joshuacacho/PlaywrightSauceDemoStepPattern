@@ -8,6 +8,10 @@ test.step — gives you a stepped trace/report in Playwright's UI, so failures p
 
 /*
 3	Wrong password / wrong username / empty fields — three separate negative cases. Does the error message differ per case, or is it generic? Worth checking if the app leaks info (e.g., "username not found" vs "wrong password" — a security-testing angle, not just functional).
+
+4	Case sensitivity — does Standard_User or STANDARD_USER log in, or strictly fail? Not always specified — worth discovering rather than assuming.
+
+5	Trailing/leading whitespace in username or password — does the app trim it, or fail login? Cheap boundary case.
 */
 
 test('Verify Error Message for Invalid Login Scenarios', async ({ loggedInPage }) => {

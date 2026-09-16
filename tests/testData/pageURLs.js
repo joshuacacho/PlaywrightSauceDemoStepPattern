@@ -4,7 +4,7 @@
 
 export const pageURL = {
 
-     inventoryPage: "inventory.html", //default page seen after logging in
+     INVENTORY_PAGE: "inventory.html", //default page seen after logging in
 
 };
 

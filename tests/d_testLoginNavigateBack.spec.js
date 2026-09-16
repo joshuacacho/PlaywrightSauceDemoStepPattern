@@ -1,27 +1,46 @@
 import { test, expect } from '../pageObjects/pageObjectFixtures';
 import { loginData } from '../tests/testData/login';
-import { returnLoginErrorMessage } from '.././pageObjects/helpers/loginUsers';
+import { pageURL } from "../tests/testData/pageURLs";
+import { logOutCurrentUser } from '.././pageObjects/helpers/loggedInUsers';
+import { securityErrorMessagePostLogOut } from '.././pageObjects/helpers/loginUsers';
 
 /*
 test.step — gives you a stepped trace/report in Playwright's UI, so failures point at "Check refund eligibility" instead of a stack trace into some 400-line test (linear scripting).
 */
 
 /*
-3	Wrong password / wrong username / empty fields — three separate negative cases. Does the error message differ per case, or is it generic? Worth checking if the app leaks info (e.g., "username not found" vs "wrong password" — a security-testing angle, not just functional).
+6	Logout then back-button — after logout, does hitting browser back expose the inventory page from cache, or does it correctly redirect to login? A classic session-security gap many apps get wrong.
 */
 
-test('Verify Error Message for Invalid Login Scenarios', async ({ loggedInPage }) => {
-  const { userLoginPage, page } = loggedInPage;
+test('Standard User Logging with Navigating Back to Log in Page and Selecting Log in Button', async ({ loggedInPage }) => {
+  // Grab the page object safely tracking the new authenticated context
+  const { page, userLoginPage, userLoggedInPage } = loggedInPage;
   let myError;
 
-  await test.step('Invalid Username Only Attempt to Log In', async () => {
 
-    //creating myError to compare with expected value from UI
-    myError = await returnLoginErrorMessage(userLoginPage, "name");
-    //console.log(myError)
-    expect(myError).toBe(loginData.invalid_login_message.missingPassword);
+  await test.step('Logging as Standard User and Assert Correct URL', async () => {
 
-    
+    // // 1. Explicitly navigate to the logged-in target page
+    //   //in our loginAndInitPageObjects.js the new page we open to store the state.json will always start at about:blank
+    //   //so we have to go directly to the page
+    let goToPage = await page.goto(loginData.BASE_URL + pageURL.INVENTORY_PAGE);
+    //console.log(goToPage.url())
+    expect(goToPage.url()).toBe(loginData.BASE_URL + pageURL.INVENTORY_PAGE);
+  });
+
+  await test.step('Logout and Navigate Back to Login Page', async () => {
+    // log out current user
+    await logOutCurrentUser(userLoggedInPage);
+
+    // go back to previous page and see if user is still logged in
+    await page.goBack();
+
+    //assert base url is seen when the user tries to navigate back
+    expect(page.url()).toBe(loginData.BASE_URL)
+    //assert error message comes up indicate invalid url
+    myError = await securityErrorMessagePostLogOut(userLoginPage);
+    expect(myError).toBe(loginData.security_log_in_after_logout.invalidAccessInventoryPage);
+
   });
 
 });

@@ -90,6 +90,10 @@ export const loginData = {
         password: 'test',
     },
 
+    mixed_case_sensitive: {
+        usernameMixedCase: 'sTaNdaRd_uSeR' //for mixed case sensitivity
+    },
+
     invalid_login_message: {
         missingPassword: "Epic sadface: Password is required",
         missingUsername: "Epic sadface: Username is required",
@@ -97,8 +101,14 @@ export const loginData = {
         invalidUsernamePassword: "Epic sadface: Username and password do not match any user in this service",
     },
 
-    mixed_case_sensitive: {
-        usernameMixedCase: 'sTaNdaRd_uSeR' //for mixed case sensitivity
+    locked_out_user_message: {
+        lockedOutUserErrorMessage: "Epic sadface: Sorry, this user has been locked out."
+    },
+
+    security_log_in_after_logout: {
+        invalidAccessInventoryPage:  "Epic sadface: You can only access '/inventory.html' when you are logged in."
     }
+
+  
 };
 

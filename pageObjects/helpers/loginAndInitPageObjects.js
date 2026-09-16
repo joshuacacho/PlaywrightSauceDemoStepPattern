@@ -6,15 +6,16 @@ loggedInPage fixture — auth/setup lives in one place instead of being copy-pas
 */
 
 // PageObjectManager wires up and hands back every page object for a given `page`
-import { PageObjectManager } from "../pageObjectMananger.js";
+import { PageObjectManager } from "../pageObjectMananger";
 // Playwright's expect — used here for setup-time assertions (login succeeded / failed as expected)
 import { expect } from '@playwright/test';
+import { loginData } from '../../tests/testData/login' //../tests/testData/login';
 
 // browser: the Playwright Browser instance from the fixture
 // user: { username, password, expectToSucceed } resolved from loginData by the fixture
 async function loginAndInitPageObjects(browser, user) {
     // pull the three pieces of user info out of the object in one line
-    const { username, password, expectToSucceed } = user;
+    const { username, password, expectToSucceed, } = user;
 
     // open a brand-new, isolated browser context (its own cookies/storage — no bleed between tests)
     const context = await browser.newContext();
@@ -39,7 +40,7 @@ async function loginAndInitPageObjects(browser, user) {
         // read the actual error text rendered on the page after the failed login attempt
         const lockedOutUserTextMessage = await loginPage.lockedOutUserError.textContent();
         // confirm it matches the exact expected lockout copy — not just "some error appeared"
-        expect(lockedOutUserTextMessage).toBe(loginPage.lockedOutUserErrorMessage);
+        expect(lockedOutUserTextMessage).toBe(loginData.locked_out_user_message.lockedOutUserErrorMessage);
 
         // stop here — there's no authenticated session to save for a failed login.
         // webContext is set to the same `context` used above (not a second one)

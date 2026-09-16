@@ -11,11 +11,11 @@ class LoginPage {
         this.page = page;
 
         //define items that need to be used to. log in
-        this.username = page.locator("#user-name");
-        this.password = page.locator("#password");
-        this.loginButton = page.locator("#login-button")
+        this.username = page.getByRole('textbox', { name: 'Username' });
+        this.password = page.getByRole('textbox', { name: 'Password' });
+        this.loginButton = page.getByRole('button', { name: 'Login' });
+        this.loggedOutLogBackInErrorMessage = page.locator("h3[data-test='error']");
         this.lockedOutUserError = page.locator("h3[data-test='error']");
-        this.lockedOutUserErrorMessage = "Epic sadface: Sorry, this user has been locked out.";
         this.multiUserError = page.locator("h3[data-test='error']");
         
     }

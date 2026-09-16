@@ -1,6 +1,6 @@
 import { test, expect } from '../pageObjects/pageObjectFixtures';
 import { loginData } from '../tests/testData/login';
-import { } from "../tests/testData/pageURLs"
+import { pageURL } from "../tests/testData/pageURLs";
 
 
 
@@ -14,8 +14,8 @@ User                        | Login          | Known behavior / bugs
 standard_user                | Succeeds       | Clean baseline — nothing intentionally broken.
 */
 
-// Enforce the standard_user
-test.use({ userType: 'standard_user' });
+// No need to enforce the standard_user since that is the user to log in by default
+//test.use({ userType: 'standard_user' });
 
 // this user the standard user
 test('Verify Standard UI Nothing Broken - opposite of problem_user Problem Which Should Work', async ({ loggedInPage }) => {
@@ -27,9 +27,9 @@ test('Verify Standard UI Nothing Broken - opposite of problem_user Problem Which
     // // 1. Explicitly navigate to the logged-in target page
     //   //in our loginAndInitPageObjects.js the new page we open to store the state.json will always start at about:blank
     //   //so we have to go directly to the page
-    let goToPage = await page.goto(loginData.BASE_URL + pageURL.inventoryPage);
+    let goToPage = await page.goto(loginData.BASE_URL + pageURL.INVENTORY_PAGE);
     //console.log(goToPage.url())
-    expect(goToPage.url()).toBe(loginData.BASE_URL + pageURL.inventoryPage);
+    expect(goToPage.url()).toBe(loginData.BASE_URL + pageURL.INVENTORY_PAGE);
   });
 
 });
