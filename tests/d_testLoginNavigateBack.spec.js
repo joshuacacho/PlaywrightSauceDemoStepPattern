@@ -2,7 +2,7 @@ import { test, expect } from '../pageObjects/pageObjectFixtures';
 import { loginData } from '../tests/testData/login';
 import { pageURL } from "../tests/testData/pageURLs";
 import { logOutCurrentUser } from '.././pageObjects/helpers/loggedInUsers';
-import { securityErrorMessagePostLogOut } from '.././pageObjects/helpers/loginUsers';
+import { securityErrorMessageUnathenticatedAccess } from '.././pageObjects/helpers/loginUsers';
 
 /*
 test.step — gives you a stepped trace/report in Playwright's UI, so failures point at "Check refund eligibility" instead of a stack trace into some 400-line test (linear scripting).
@@ -38,7 +38,7 @@ test('Standard User Logging with Navigating Back to Log in Page and Selecting Lo
     //assert base url is seen when the user tries to navigate back
     expect(page.url()).toBe(loginData.BASE_URL)
     //assert error message comes up indicate invalid url
-    myError = await securityErrorMessagePostLogOut(userLoginPage);
+    myError = await securityErrorMessageUnathenticatedAccess(userLoginPage);
     expect(myError).toBe(loginData.security_log_in_after_logout.invalidAccessInventoryPage);
 
   });

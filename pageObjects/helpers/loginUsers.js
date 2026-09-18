@@ -8,7 +8,7 @@ async function returnLoginErrorMessage(userLoginPage, fieldName) {
   return myError;
 }
 
-async function securityErrorMessagePostLogOut(userLoginPage) {
+async function securityErrorMessageUnathenticatedAccess(userLoginPage) {
 
   let myError = await userLoginPage.loggedOutLogBackInErrorMessage.textContent();
   //console.log(myError). Epic sadface: You can only access '/inventory.html' when you are logged in.
@@ -21,5 +21,5 @@ async function securityErrorMessagePostLogOut(userLoginPage) {
 //export class to be used globally
 export { 
   returnLoginErrorMessage,
-  securityErrorMessagePostLogOut
+  securityErrorMessageUnathenticatedAccess
 };
