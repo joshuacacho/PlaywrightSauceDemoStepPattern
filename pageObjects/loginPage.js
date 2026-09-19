@@ -2,6 +2,8 @@
 
 import { expect } from '@playwright/test';
 import { loginData } from '../tests/testData/login';
+import { performance } from 'node:perf_hooks';
+import { pageURL } from '../tests/testData/pageURLs';
 
 
 class LoginPage {
@@ -39,6 +41,28 @@ class LoginPage {
             await this.username.fill(username);
             await this.password.fill(password);
             await this.loginButton.click();
+
+        } catch (error) {
+            console.error(error.stack)
+            throw error
+        }
+    }
+
+
+
+    //method to test performance
+    async performanceLogIn(username) {
+        try {
+
+            let duration = 0;
+
+            let start_duration = performance.now();
+            await this.login(loginData[username].username, loginData[username].password);
+            await expect(this.page).toHaveURL(loginData.BASE_URL + pageURL.INVENTORY_PAGE);
+            duration = (performance.now() - start_duration) / 1000;  //to return value in seconds
+            console.log(loginData[username].username + " " + duration);
+
+            return duration;
 
         } catch (error) {
             console.error(error.stack)

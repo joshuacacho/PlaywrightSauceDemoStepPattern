@@ -45,13 +45,14 @@ test.describe("problem_user", () => {
 
      console.log(myImages);
 
-     expect(myImages).toContain(inventoryImages.invalid_images.DOG_SRC_IMG);
-     expect(myImages).not.toContain(inventoryImages.valid_images.SAUCE_LABS_BACKPACK_SRC_IMG);
-     expect(myImages).not.toContain(inventoryImages.valid_images.SAUCE_LABS_BIKE_LIGHT_SRC_IMG);
-     expect(myImages).not.toContain(inventoryImages.valid_images.SAUCE_LABS_BOLT_TSHIRT_SRC_IMG);
-     expect(myImages).not.toContain(inventoryImages.valid_images.SAUCE_LABS_FLEECE_JACKET_SRC_IMG);
-     expect(myImages).not.toContain(inventoryImages.valid_images.SAUCE_LABS_ONSESIE_SRC_IMG);
-     expect(myImages).not.toContain(inventoryImages.valid_images.SAUCE_LABS_TEST_ALL_THINGS_TSHIRT_SRC_IMG);
+     expect(myImages.some(src => src.includes(inventoryImages.invalid_images.DOG_SRC_IMG))).toBe(true);
+     expect(myImages.some(src => src.includes(inventoryImages.valid_images.SAUCE_LABS_BACKPACK_SRC_IMG))).toBe(false);
+     expect(myImages.some(src => src.includes(inventoryImages.valid_images.SAUCE_LABS_BIKE_LIGHT_SRC_IMG))).toBe(false);
+     expect(myImages.some(src => src.includes(inventoryImages.valid_images.SAUCE_LABS_BOLT_TSHIRT_SRC_IMG))).toBe(false);
+     expect(myImages.some(src => src.includes(inventoryImages.valid_images.SAUCE_LABS_FLEECE_JACKET_SRC_IMG))).toBe(false);
+     expect(myImages.some(src => src.includes(inventoryImages.valid_images.SAUCE_LABS_ONSESIE_SRC_IMG))).toBe(false);
+     expect(myImages.some(src => src.includes(inventoryImages.valid_images.SAUCE_LABS_TEST_ALL_THINGS_TSHIRT_SRC_IMG))).toBe(false);
+
 
   });
 });
@@ -70,13 +71,14 @@ test.describe("standard_user", () => {
 
      console.log(myImages);
 
-     expect(myImages).not.toContain(inventoryImages.invalid_images.DOG_SRC_IMG);
-     expect(myImages).toContain(inventoryImages.valid_images.SAUCE_LABS_BACKPACK_SRC_IMG);
-     expect(myImages).toContain(inventoryImages.valid_images.SAUCE_LABS_BIKE_LIGHT_SRC_IMG);
-     expect(myImages).toContain(inventoryImages.valid_images.SAUCE_LABS_BOLT_TSHIRT_SRC_IMG);
-     expect(myImages).toContain(inventoryImages.valid_images.SAUCE_LABS_FLEECE_JACKET_SRC_IMG);
-     expect(myImages).toContain(inventoryImages.valid_images.SAUCE_LABS_ONSESIE_SRC_IMG);
-     expect(myImages).toContain(inventoryImages.valid_images.SAUCE_LABS_TEST_ALL_THINGS_TSHIRT_SRC_IMG);
+
+     expect(myImages.some(src => src.includes(inventoryImages.invalid_images.DOG_SRC_IMG))).toBe(false);  
+     expect(myImages.some(src => src.includes(inventoryImages.valid_images.SAUCE_LABS_BACKPACK_SRC_IMG))).toBe(true);
+     expect(myImages.some(src => src.includes(inventoryImages.valid_images.SAUCE_LABS_BIKE_LIGHT_SRC_IMG))).toBe(true);
+     expect(myImages.some(src => src.includes(inventoryImages.valid_images.SAUCE_LABS_BOLT_TSHIRT_SRC_IMG))).toBe(true);
+     expect(myImages.some(src => src.includes(inventoryImages.valid_images.SAUCE_LABS_FLEECE_JACKET_SRC_IMG))).toBe(true);
+     expect(myImages.some(src => src.includes(inventoryImages.valid_images.SAUCE_LABS_ONSESIE_SRC_IMG))).toBe(true);
+     expect(myImages.some(src => src.includes(inventoryImages.valid_images.SAUCE_LABS_TEST_ALL_THINGS_TSHIRT_SRC_IMG))).toBe(true);
 
   });
 });

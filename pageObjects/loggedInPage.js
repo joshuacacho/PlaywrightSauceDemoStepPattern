@@ -16,7 +16,7 @@ class LoggedInPage {
         this.hamburgerMenu = page.getByRole('button', { name: 'Open Menu' });
         // Matches "LOGOUT", "Logout", or "logout" page.getByRole('link', { name: /logout/i });
         this.hamburgerMenuLogout =  page.locator('[data-test="logout-sidebar-link"]');
-        this.inventoryItemImages = page.locator(".inventory_item_img");
+        this.inventoryItemImages = page.locator(".inventory_item a img[src^='/assets']");
 
     }
 
