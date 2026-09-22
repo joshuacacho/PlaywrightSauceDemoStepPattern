@@ -17,6 +17,8 @@ class LoggedInPage {
         // Matches "LOGOUT", "Logout", or "logout" page.getByRole('link', { name: /logout/i });
         this.hamburgerMenuLogout =  page.locator('[data-test="logout-sidebar-link"]');
         this.inventoryItemImages = page.locator(".inventory_item a img[src^='/assets']");
+        this.invetoryItemText = page.locator(".inventory_item_name");
+        this.productSortItems = page.locator(".product_sort_container");
 
     }
 
@@ -53,6 +55,43 @@ class LoggedInPage {
             throw error;
         }
         
+    }
+
+    async getSortedItemList() {
+
+        try {
+            let itemInventory = [];
+             // dont use length because its length hasnt been defined yet
+            let itemCount = await this.invetoryItemText.count();
+
+            for (let i=0; i<itemCount; i++) {
+                let itemText = await this.invetoryItemText.nth(i).textContent();
+                itemInventory.push(itemText);
+            }
+
+        return itemInventory;
+
+        } catch (error) {
+            console.error(error.stack);
+            throw error;
+        }
+        
+    }
+
+
+    async sortList(selection) {
+        
+        try {
+
+           await this.productSortItems.selectOption(selection);
+
+
+        } catch (error) {
+            console.error(error.stack)
+            throw error
+        }
+
+
     }
 }
 

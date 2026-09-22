@@ -10,10 +10,22 @@ async function getAllImagesInventoryPage(userLoggedInPage){
   return myImages;
 }
 
+async function getSortedItemListInventoryPage(userLoggedInPage){
 
+  let myInventoryText = await userLoggedInPage.getSortedItemList();
+  return myInventoryText;
+}
+
+async function selectSortListItem(userLoggedInPage, selection){
+
+  await userLoggedInPage.sortList(selection);
+  
+}
 
 //export class to be used globally
 export { 
   logOutCurrentUser,
-  getAllImagesInventoryPage
+  getAllImagesInventoryPage,
+  selectSortListItem,
+  getSortedItemListInventoryPage
 };
